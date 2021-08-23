@@ -3,7 +3,8 @@ import React from "react";
 const Exercises = () => {
   return (
     <div className="exercises">
-      <h1>Exercises</h1>
+      <div className="exercises-left">hello</div>
+      <div className="exercises-right">the card</div>
     </div>
   );
 };
