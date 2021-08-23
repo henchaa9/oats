@@ -7,7 +7,7 @@ const ExerciseCard = ({ text, amount }) => {
         <p>{text ? text : "exercise"}</p>
       </div>
       <div className="card-amount">
-        <p>{amount ? amount : "4x12"}</p>
+        <p>{amount ? amount : "-"}</p>
       </div>
     </div>
   );

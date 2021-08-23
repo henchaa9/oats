@@ -4,8 +4,9 @@ import Date from "./Date";
 const Home = () => {
   return (
     <div className="home">
-      <Date />
-      <h1>{}</h1>
+      <Date date={"Today"} />
+      <Date date={"26.03"} />
+      <Date date={"27.03"} />
     </div>
   );
 };
