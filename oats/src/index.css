@@ -87,7 +87,7 @@ body {
 }
 
 .card-amount {
-  background-color: rgb(255, 102, 0);
+  background-color: rgb(255, 115, 0);
   white-space: nowrap;
   overflow: hidden;
   max-width: 100px;
@@ -129,8 +129,47 @@ body {
   box-shadow: 3px 3px 1px 1px rgb(206, 206, 206);
 }
 
+.exercises-left {
+  width: 35%;
+}
+
 .exercises-left,
 .exercises-right {
-  width: 50%;
   padding: 20px;
+}
+
+.addExercise {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.8rem;
+  background-color: rgb(255, 115, 0);
+  border: none;
+  font-weight: 500;
+  border: 2px solid black;
+  box-shadow: 3px 3px 1px 1px rgb(206, 206, 206);
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+
+.exerciseList {
+  list-style-type: none;
+  margin-top: 2rem;
+  height: calc(100vh - 13rem);
+  white-space: nowrap;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0 1rem;
+  border-radius: 15px;
+}
+
+.exerciseList li {
+  font-size: 1.5rem;
+  padding: 0.5rem 0 0.5rem 0.6rem;
+  letter-spacing: 1px;
+  text-align: center;
+  border-bottom: 1px solid rgb(206, 206, 206);
+}
+
+.exerciseList li:hover {
+  background-color: rgb(221, 221, 221);
 }
