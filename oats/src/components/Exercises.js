@@ -1,10 +1,24 @@
 import { React, useState, useEffect } from "react";
+import ShowDescription from "./ShowDescription";
+import AddExercise from "./AddExercise";
 
 var allExercises = [
   {
     id: 1,
-    name: "squats",
-    description: "le good ol squats me boi",
+    name: "squats sdf sdf sdf sdfsdfsdf sdfsdfsdfsdfsdfsfd sdfsdfsdfsdsdf",
+    description:
+      "hello ol squats me boiLorem, ipsum dolor sit amet consectetur adipisicing elit. \
+      apiente eos quasi aliquid delectus, a distinctio veritatis dolores consequuntur v \
+      el molestiae ut aliquam neque voluptates. Rem ullam, earum beatae dolore consequuntur sunt,\
+      quia molestiae temporibus possimus aspernatur, excepturi odit  hello ol squats me boiLorem,\
+      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem, \
+      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
+      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem, \
+      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
+      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
+      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
+      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
+      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem ",
   },
   {
     id: 2,
@@ -60,6 +74,7 @@ var allExercises = [
 
 const Exercises = () => {
   const [desc, setDesc] = useState({ name: "hello", description: "world" });
+  const [showAdd, setShowAdd] = useState(false);
 
   useEffect(() => {
     setDesc({
@@ -71,7 +86,14 @@ const Exercises = () => {
   return (
     <div className="exercises">
       <div className="exercises-left">
-        <button className="addExercise">New</button>
+        <button
+          className="addExercise"
+          onClick={() => {
+            setShowAdd(!showAdd);
+          }}
+        >
+          New
+        </button>
         <ul className="exerciseList">
           {allExercises.map((exercise) => {
             return (
@@ -91,8 +113,11 @@ const Exercises = () => {
         </ul>
       </div>
       <div className="exercises-right">
-        <h4>{desc.name}</h4>
-        <p>{desc.description}</p>
+        {showAdd ? (
+          <AddExercise arr={allExercises} />
+        ) : (
+          <ShowDescription name={desc.name} description={desc.description} />
+        )}
       </div>
     </div>
   );
