@@ -1,24 +1,12 @@
 import { React, useState, useEffect } from "react";
 import ShowDescription from "./ShowDescription";
-import AddExercise from "./AddExercise";
 
 var allExercises = [
   {
     id: 1,
-    name: "squats sdf sdf sdf sdfsdfsdf sdfsdfsdfsdfsdfsfd sdfsdfsdfsdsdf",
+    name: "squats",
     description:
-      "hello ol squats me boiLorem, ipsum dolor sit amet consectetur adipisicing elit. \
-      apiente eos quasi aliquid delectus, a distinctio veritatis dolores consequuntur v \
-      el molestiae ut aliquam neque voluptates. Rem ullam, earum beatae dolore consequuntur sunt,\
-      quia molestiae temporibus possimus aspernatur, excepturi odit  hello ol squats me boiLorem,\
-      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem, \
-      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
-      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem, \
-      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
-      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
-      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
-      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem,\
-      ipsum dolor sit amet consectetur adipisicing elit. Sapiente eos quahello ol squats me boiLorem ",
+      "hello ol squats me boiLorem, ipsum dolor sit amet consectetur adipisicing elit.",
   },
   {
     id: 2,
@@ -45,36 +33,40 @@ var allExercises = [
     name: "calf raises",
     description: "le good ol calf raises me boi",
   },
-  {
-    id: 7,
-    name: "calf raises",
-    description: "le good ol calf raises me boi",
-  },
-  {
-    id: 8,
-    name: "calf raises",
-    description: "le good ol calf raises me boi",
-  },
-  {
-    id: 9,
-    name: "calf raises",
-    description: "le good ol calf raises me boi",
-  },
-  {
-    id: 10,
-    name: "calf raises",
-    description: "le good ol calf raises me boi",
-  },
-  {
-    id: 11,
-    name: "calf raises",
-    description: "le good ol calf raises me boi",
-  },
 ];
 
 const Exercises = () => {
   const [desc, setDesc] = useState({ name: "hello", description: "world" });
   const [showAdd, setShowAdd] = useState(false);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [exercises, setExercises] = useState(allExercises);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (name) {
+      const exercise = {
+        name,
+        description,
+      };
+      setExercises((exercises) => {
+        return [...exercises, exercise];
+      });
+      setName("");
+      setDescription("");
+    } else {
+      alert("Please add a name!");
+    }
+
+    console.log(exercises);
+  };
+
+  const handleCancel = () => {
+    setShowAdd(!showAdd);
+    setName("");
+    setDescription("");
+  };
 
   useEffect(() => {
     setDesc({
@@ -87,7 +79,7 @@ const Exercises = () => {
     <div className="exercises">
       <div className="exercises-left">
         <button
-          className="addExercise"
+          className="addExercise-btn"
           onClick={() => {
             setShowAdd(!showAdd);
           }}
@@ -95,7 +87,7 @@ const Exercises = () => {
           New
         </button>
         <ul className="exerciseList">
-          {allExercises.map((exercise) => {
+          {exercises.map((exercise) => {
             return (
               <li
                 key={exercise.id}
@@ -114,7 +106,31 @@ const Exercises = () => {
       </div>
       <div className="exercises-right">
         {showAdd ? (
-          <AddExercise arr={allExercises} />
+          <div className="add-exercise">
+            <form className="form" onSubmit={handleSubmit}>
+              <p htmlFor="form-name">Name</p>
+              <input
+                type="text"
+                name="form-name"
+                id="form-name"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+              <p htmlFor="form-desc">Description</p>
+              <textarea
+                name="form-desc"
+                id="form-desc"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <div>
+                <button onClick={handleCancel}>Cancel</button>
+                <button type="submit">Add</button>
+              </div>
+            </form>
+          </div>
         ) : (
           <ShowDescription name={desc.name} description={desc.description} />
         )}

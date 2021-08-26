@@ -144,7 +144,7 @@ body {
   padding: 20px;
 }
 
-.addExercise {
+.addExercise-btn {
   margin-left: 0.5rem;
   font-size: 1.2rem;
   padding: 0.5rem 0.8rem;
@@ -156,7 +156,7 @@ body {
   letter-spacing: 1px;
 }
 
-.addExercise:hover {
+.addExercise-btn:hover {
   cursor: pointer;
   background-color: rgb(216, 98, 2);
 }
