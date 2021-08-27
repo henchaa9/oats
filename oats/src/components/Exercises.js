@@ -1,65 +1,50 @@
 import { React, useState, useEffect } from "react";
 import ShowDescription from "./ShowDescription";
 
-var allExercises = [
-  {
-    id: 1,
-    name: "squats",
-    description:
-      "hello ol squats me boiLorem, ipsum dolor sit amet consectetur adipisicing elit.",
-  },
-  {
-    id: 2,
-    name: "deadlift",
-    description: "le good ol deadlift me boi",
-  },
-  {
-    id: 3,
-    name: "shoulder press",
-    description: "le good ol shoulder press me boi",
-  },
-  {
-    id: 4,
-    name: "bench press",
-    description: "le good ol bench press me boi",
-  },
-  {
-    id: 5,
-    name: "leg extensions",
-    description: "le good ol leg extensions me boi",
-  },
-  {
-    id: 6,
-    name: "calf raises",
-    description: "le good ol calf raises me boi",
-  },
-];
-
 const Exercises = () => {
-  const [desc, setDesc] = useState({ name: "hello", description: "world" });
+  const [exerciseData, setExerciseData] = useState({
+    name: "",
+    description: "Click on an exercise",
+    id: 0,
+  });
   const [showAdd, setShowAdd] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [exercises, setExercises] = useState(allExercises);
+  const [exercises, setExercises] = useState(null);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    fetch("http://localhost:8000/exercises")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setExercises(data);
+      });
+  }, []);
+
+  const handleAdd = async (e) => {
     e.preventDefault();
 
-    if (name) {
-      const exercise = {
-        name,
-        description,
-      };
-      setExercises((exercises) => {
-        return [...exercises, exercise];
-      });
-      setName("");
-      setDescription("");
-    } else {
-      alert("Please add a name!");
-    }
+    const exercise = {
+      name,
+      description,
+    };
 
-    console.log(exercises);
+    const res = await fetch("http://localhost:8000/exercises", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(exercise),
+    });
+
+    const data = await res.json();
+
+    setExercises([...exercises, data]);
+
+    setName("");
+    setDescription("");
+    setShowAdd(false);
   };
 
   const handleCancel = () => {
@@ -68,75 +53,86 @@ const Exercises = () => {
     setDescription("");
   };
 
-  useEffect(() => {
-    setDesc({
-      name: allExercises[0].name,
-      description: allExercises[0].description,
+  const handleDelete = async (id) => {
+    await fetch(`http://localhost:8000/exercises/${id}`, {
+      method: "DELETE",
     });
-  }, []);
 
-  return (
-    <div className="exercises">
-      <div className="exercises-left">
-        <button
-          className="addExercise-btn"
-          onClick={() => {
-            setShowAdd(!showAdd);
-          }}
-        >
-          New
-        </button>
-        <ul className="exerciseList">
-          {exercises.map((exercise) => {
-            return (
-              <li
-                key={exercise.id}
-                onClick={() => {
-                  setDesc({
-                    name: exercise.name,
-                    description: exercise.description,
-                  });
-                }}
-              >
-                {exercise.name}
-              </li>
-            );
-          })}
-        </ul>
+    setExercises(exercises.filter((exercise) => exercise.id !== id));
+    setExerciseData({ name: "", description: "", id: 0 });
+  };
+
+  if (exercises) {
+    return (
+      <div className="exercises">
+        <div className="exercises-left">
+          <button
+            className="addExercise-btn"
+            onClick={() => {
+              setShowAdd(!showAdd);
+            }}
+          >
+            New
+          </button>
+          <ul className="exerciseList">
+            {exercises.map((exercise) => {
+              return (
+                <li
+                  key={exercise.id}
+                  onClick={() => {
+                    setExerciseData({
+                      name: exercise.name,
+                      description: exercise.description,
+                      id: exercise.id,
+                    });
+                  }}
+                >
+                  {exercise.name}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="exercises-right">
+          {showAdd ? (
+            <div className="add-exercise">
+              <form className="form" onSubmit={handleAdd}>
+                <p htmlFor="form-name">Name</p>
+                <input
+                  type="text"
+                  name="form-name"
+                  id="form-name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+                <p htmlFor="form-desc">Description</p>
+                <textarea
+                  name="form-desc"
+                  id="form-desc"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                <div>
+                  <button onClick={handleCancel}>Cancel</button>
+                  <button type="submit">Add</button>
+                </div>
+              </form>
+            </div>
+          ) : (
+            <ShowDescription
+              name={exerciseData.name}
+              description={exerciseData.description}
+              deleteFunc={() => handleDelete(exerciseData.id)}
+            />
+          )}
+        </div>
       </div>
-      <div className="exercises-right">
-        {showAdd ? (
-          <div className="add-exercise">
-            <form className="form" onSubmit={handleSubmit}>
-              <p htmlFor="form-name">Name</p>
-              <input
-                type="text"
-                name="form-name"
-                id="form-name"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-              <p htmlFor="form-desc">Description</p>
-              <textarea
-                name="form-desc"
-                id="form-desc"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-              <div>
-                <button onClick={handleCancel}>Cancel</button>
-                <button type="submit">Add</button>
-              </div>
-            </form>
-          </div>
-        ) : (
-          <ShowDescription name={desc.name} description={desc.description} />
-        )}
-      </div>
-    </div>
-  );
+    );
+  } else {
+    return <div className="loading">Loading...</div>;
+  }
 };
 
 export default Exercises;

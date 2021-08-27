@@ -1,0 +1,19 @@
+{
+  "exercises": [
+    {
+      "id": 1,
+      "name": "squats",
+      "description": "hello ol squats me boiLorem, ipsum dolor sit amet consectetur adipisicing elit.  "
+    },
+    {
+      "id": 2,
+      "name": "deadlift",
+      "description": "hello ol squats me boiLorem, ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+      "id": 3,
+      "name": "bench press",
+      "description": "hello ol squats me boiLorem, ipsum dolor sit amet consectetur adipisicing elit."
+    }
+  ]
+}
