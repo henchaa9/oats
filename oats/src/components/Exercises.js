@@ -25,26 +25,30 @@ const Exercises = () => {
   const handleAdd = async (e) => {
     e.preventDefault();
 
-    const exercise = {
-      name,
-      description,
-    };
+    if (name) {
+      const exercise = {
+        name,
+        description,
+      };
 
-    const res = await fetch("http://localhost:8000/exercises", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(exercise),
-    });
+      const res = await fetch("http://localhost:8000/exercises", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(exercise),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    setExercises([...exercises, data]);
+      setExercises([...exercises, data]);
 
-    setName("");
-    setDescription("");
-    setShowAdd(false);
+      setName("");
+      setDescription("");
+      setShowAdd(false);
+    } else {
+      alert("Please enter a name!");
+    }
   };
 
   const handleCancel = () => {
@@ -97,8 +101,11 @@ const Exercises = () => {
           {showAdd ? (
             <div className="add-exercise">
               <form className="form" onSubmit={handleAdd}>
-                <p htmlFor="form-name">Name</p>
+                <p htmlFor="form-name" className="exercises-addName">
+                  Name
+                </p>
                 <input
+                  className="exercises-addName-input"
                   type="text"
                   name="form-name"
                   id="form-name"
@@ -107,16 +114,23 @@ const Exercises = () => {
                     setName(e.target.value);
                   }}
                 />
-                <p htmlFor="form-desc">Description</p>
+                <p htmlFor="form-desc" className="exercises-addDesc">
+                  Description
+                </p>
                 <textarea
+                  className="exercises-addDesc-textarea"
                   name="form-desc"
                   id="form-desc"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
                 <div>
-                  <button onClick={handleCancel}>Cancel</button>
-                  <button type="submit">Add</button>
+                  <button className="addExercise-cancel" onClick={handleCancel}>
+                    Cancel
+                  </button>
+                  <button className="addExercise-submit" type="submit">
+                    Add
+                  </button>
                 </div>
               </form>
             </div>

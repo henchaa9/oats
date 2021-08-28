@@ -2,7 +2,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
-import Calendar from "./components/Calendar";
+import CalendarPage from "./components/CalendarPage";
 import Exercises from "./components/Exercises";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
                 <Home />
               </Route>
               <Route path="/calendar">
-                <Calendar />
+                <CalendarPage />
               </Route>
               <Route path="/exercises">
                 <Exercises />

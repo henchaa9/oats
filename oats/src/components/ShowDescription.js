@@ -1,6 +1,6 @@
 import React from "react";
 
-const ShowDescription = ({ name, description, deleteFunc }) => {
+const ShowDescription = ({ name, description, deleteFunc, editFunc }) => {
   return (
     <div className="description-div">
       <p className="showName">{name}</p>
