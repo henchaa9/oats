@@ -1,12 +1,12 @@
 {
   "exercises": [
     {
-      "name": "Squats",
+      "name": "squats",
       "description": "",
       "id": 1
     },
     {
-      "name": "Deadlifts",
+      "name": "deadlift",
       "description": "",
       "id": 2
     }

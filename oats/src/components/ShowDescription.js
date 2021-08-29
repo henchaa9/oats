@@ -6,9 +6,12 @@ const ShowDescription = ({ name, description, deleteFunc, editFunc }) => {
       <p className="showName">{name}</p>
       <p className="showDescription">{description}</p>
       {name && (
-        <button className="delete-exercise" onClick={deleteFunc}>
-          Delete
-        </button>
+        <div>
+          <button onClick={editFunc}>Edit</button>
+          <button className="delete-exercise" onClick={deleteFunc}>
+            Delete
+          </button>
+        </div>
       )}
     </div>
   );
