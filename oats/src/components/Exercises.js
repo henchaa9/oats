@@ -2,18 +2,14 @@ import { React, useState, useEffect } from "react";
 import ShowDescription from "./ShowDescription";
 
 const Exercises = () => {
-  const [exerciseData, setExerciseData] = useState({
-    id: 0,
-    name: "",
-    description: "Click on an exercise",
-  });
   const [showAdd, setShowAdd] = useState(false);
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("Click on an exercise");
+  const [id, setId] = useState(0);
   const [exercises, setExercises] = useState(null);
   const [editMode, setEditMode] = useState(false);
 
-  useEffect(() => {
+  const fetchAndSet = () => {
     fetch("http://localhost:8000/exercises")
       .then((res) => {
         return res.json();
@@ -21,6 +17,10 @@ const Exercises = () => {
       .then((data) => {
         setExercises(data);
       });
+  };
+
+  useEffect(() => {
+    fetchAndSet();
   }, []);
 
   const handleAdd = async (e) => {
@@ -44,9 +44,9 @@ const Exercises = () => {
 
       setExercises([...exercises, data]);
 
-      setExerciseData({ name: "", description: "Click on an exercise", id: 0 });
       setName("");
-      setDescription("");
+      setDescription("Click on an exercise");
+      setId(0);
       setShowAdd(false);
     } else {
       alert("Please enter a name!");
@@ -56,7 +56,8 @@ const Exercises = () => {
   const handleCancel = () => {
     setShowAdd(false);
     setName("");
-    setDescription("");
+    setDescription("Click on an exercise");
+    setId(0);
   };
 
   const handleDelete = async (id) => {
@@ -65,17 +66,17 @@ const Exercises = () => {
     });
 
     setExercises(exercises.filter((exercise) => exercise.id !== id));
-    setExerciseData({ name: "", description: "Click on an exercise", id: 0 });
+    setName("");
+    setDescription("Click on an exercise");
+    setId(0);
   };
 
   const showEdit = () => {
     setEditMode(true);
     setShowAdd(true);
-    setName(exerciseData.name);
-    setDescription(exerciseData.description);
   };
 
-  const handleEdit = (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
 
     if (name) {
@@ -83,21 +84,18 @@ const Exercises = () => {
         name,
         description,
       };
-      console.log(exerciseData.id);
 
-      fetch(`http://localhost:8000/exercises/${exerciseData.id}`, {
+      await fetch(`http://localhost:8000/exercises/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(exercise),
       });
-      // kkas ar id nav, citreiz 404 izmet, ari setExercises jaizdoma
 
-      setExerciseData({ name, description });
-
-      setName("");
-      setDescription("");
+      fetchAndSet();
+      setName(name);
+      setDescription(description);
       setShowAdd(false);
     } else {
       alert("Please enter a name!");
@@ -113,6 +111,9 @@ const Exercises = () => {
             onClick={() => {
               setShowAdd(true);
               setEditMode(false);
+              setName("");
+              setDescription("");
+              setId(0);
             }}
           >
             New
@@ -123,11 +124,9 @@ const Exercises = () => {
                 <li
                   key={exercise.id}
                   onClick={() => {
-                    setExerciseData({
-                      name: exercise.name,
-                      description: exercise.description,
-                      id: exercise.id,
-                    });
+                    setName(exercise.name);
+                    setDescription(exercise.description);
+                    setId(exercise.id);
                   }}
                 >
                   {exercise.name}
@@ -139,87 +138,48 @@ const Exercises = () => {
         <div className="exercises-right">
           {showAdd ? (
             <div className="add-exercise">
-              {editMode ? (
-                <form className="form" onSubmit={handleEdit}>
-                  <p htmlFor="form-name" className="exercises-addName">
-                    Name
-                  </p>
-                  <input
-                    className="exercises-addName-input"
-                    type="text"
-                    name="form-name"
-                    id="form-name"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                  />
-                  <p htmlFor="form-desc" className="exercises-addDesc">
-                    Description
-                  </p>
-                  <textarea
-                    className="exercises-addDesc-textarea"
-                    name="form-desc"
-                    id="form-desc"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                  <div>
-                    <button
-                      className="addExercise-cancel"
-                      onClick={handleCancel}
-                    >
-                      Cancel
-                    </button>
-                    <button className="addExercise-submit" type="submit">
-                      Save
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <form className="form" onSubmit={handleAdd}>
-                  <p htmlFor="form-name" className="exercises-addName">
-                    Name
-                  </p>
-                  <input
-                    className="exercises-addName-input"
-                    type="text"
-                    name="form-name"
-                    id="form-name"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                  />
-                  <p htmlFor="form-desc" className="exercises-addDesc">
-                    Description
-                  </p>
-                  <textarea
-                    className="exercises-addDesc-textarea"
-                    name="form-desc"
-                    id="form-desc"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                  <div>
-                    <button
-                      className="addExercise-cancel"
-                      onClick={handleCancel}
-                    >
-                      Cancel
-                    </button>
-                    <button className="addExercise-submit" type="submit">
-                      Add
-                    </button>
-                  </div>
-                </form>
-              )}
+              <form
+                className="form"
+                onSubmit={editMode ? handleEdit : handleAdd}
+              >
+                <p htmlFor="form-name" className="exercises-addName">
+                  Name
+                </p>
+                <input
+                  className="exercises-addName-input"
+                  type="text"
+                  name="form-name"
+                  id="form-name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+                <p htmlFor="form-desc" className="exercises-addDesc">
+                  Description
+                </p>
+                <textarea
+                  className="exercises-addDesc-textarea"
+                  name="form-desc"
+                  id="form-desc"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                <div>
+                  <button className="addExercise-cancel" onClick={handleCancel}>
+                    Cancel
+                  </button>
+                  <button className="addExercise-submit" type="submit">
+                    {editMode ? "Save" : "Add"}
+                  </button>
+                </div>
+              </form>
             </div>
           ) : (
             <ShowDescription
-              name={exerciseData.name}
-              description={exerciseData.description}
-              deleteFunc={() => handleDelete(exerciseData.id)}
+              name={name}
+              description={description}
+              deleteFunc={() => handleDelete(id)}
               editFunc={showEdit}
             />
           )}

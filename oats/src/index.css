@@ -225,6 +225,26 @@ body {
   background-color: rgb(221, 221, 221);
 }
 
+.edit-exercise {
+  font-size: 1.2rem;
+  padding: 0.5rem 0.8rem;
+  position: absolute;
+  right: 100px;
+  bottom: 0;
+  /* background-color: rgb(255, 115, 0); */
+  background-color: rgb(240, 240, 240);
+  font-weight: 500;
+  border: 2px solid black;
+  box-shadow: 3px 3px 1px 1px rgb(206, 206, 206);
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+
+.edit-exercise:hover {
+  cursor: pointer;
+  background-color: rgb(221, 221, 221);
+}
+
 .description-div {
   position: relative;
   padding-bottom: 3rem;
@@ -295,3 +315,5 @@ body {
   background-color: rgb(221, 221, 221);
   cursor: pointer;
 }
+
+/* no 920 pixeliem jamaina uz mobile */
