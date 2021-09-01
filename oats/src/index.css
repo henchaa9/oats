@@ -317,3 +317,11 @@ body {
 }
 
 /* no 920 pixeliem jamaina uz mobile */
+
+.calendar-main {
+  display: flex;
+}
+
+.calendar-div {
+  padding: 18vh 1.5rem;
+}
