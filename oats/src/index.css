@@ -323,5 +323,13 @@ body {
 }
 
 .calendar-div {
-  padding: 18vh 1.5rem;
+  padding: 3vh 0 0 1.5rem;
+}
+
+.today-date {
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
 }

@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -6,16 +6,20 @@ const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
   const [showDate, setShowDate] = useState("");
 
+  useEffect(() => {
+    formatShowDate(date);
+    // eslint-disable-next-line
+  }, []);
+
   const clickDate = (date) => {
     setDate(date);
+    formatShowDate(date);
+  };
 
-    if (new Date().getFullYear() < date.getFullYear()) {
-      setShowDate(
-        date.getDate() + "." + date.getMonth() + "." + date.getFullYear()
-      );
-    } else {
-      setShowDate(date.getDate() + "." + date.getMonth());
-    }
+  const formatShowDate = (date) => {
+    setShowDate(
+      date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear()
+    );
   };
 
   return (
@@ -24,7 +28,12 @@ const CalendarPage = () => {
         <Calendar value={date} onChange={clickDate} />
       </div>
       <div className="day-div">
-        <h1>{showDate}</h1>
+        <div className="today-exercises">
+          <p className="today-date">{showDate}</p>
+        </div>
+        <div className="set-exercises">
+          <p>nothing</p>
+        </div>
       </div>
     </div>
   );
