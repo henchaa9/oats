@@ -1,10 +1,13 @@
 import { React, useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import TodaysExercises from "./TodaysExercises";
+import AddExercises from "./AddExercises";
 
 const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
   const [showDate, setShowDate] = useState("");
+  const [addExercise, setAddExercise] = useState(false);
 
   useEffect(() => {
     formatShowDate(date);
@@ -31,8 +34,12 @@ const CalendarPage = () => {
         <div className="today-exercises">
           <p className="today-date">{showDate}</p>
         </div>
-        <div className="set-exercises">
-          <p>nothing</p>
+        <div className="set-todays-exercises">
+          {addExercise ? (
+            <AddExercises />
+          ) : (
+            <TodaysExercises addFunc={() => setAddExercise(true)} />
+          )}
         </div>
       </div>
     </div>
