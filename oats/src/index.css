@@ -339,7 +339,7 @@ body {
 }
 
 .today-date {
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 1rem 2rem 0.5rem 2rem;
   font-size: 2.6rem;
   font-weight: 600;
   text-decoration: underline;
@@ -357,7 +357,7 @@ body {
 
 .calendar-add-btn {
   font-size: 1.2rem;
-  margin: 0.1rem 0 0.5rem 0.6rem;
+  margin: 0 0 0 0.6rem;
   padding: 0.5rem 0.8rem;
   background-color: var(--accent-orange);
   font-weight: 500;
@@ -370,4 +370,28 @@ body {
 .calendar-add-btn:hover {
   background-color: var(--hover-orange);
   cursor: pointer;
+}
+
+.smallList {
+  list-style-type: none;
+  margin-top: 1rem;
+  white-space: nowrap;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0 1rem;
+  border-radius: 15px;
+  width: 92%;
+}
+
+.smallList li {
+  font-size: 1.2rem;
+  padding: 0.5rem 0 0.5rem 0.6rem;
+  letter-spacing: 1px;
+  text-align: center;
+  border-bottom: 1px solid var(--shadow-gray);
+  overflow-x: hidden;
+}
+
+.smallList li:hover {
+  background-color: var(--hover-gray);
 }
