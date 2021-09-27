@@ -32,7 +32,7 @@ const CalendarPage = () => {
       </div>
       <div className="day-div">
         <div className="today-exercises">
-          <p className="today-date">{showDate}</p>
+          {!addExercise && <p className="today-date">{showDate}</p>}
         </div>
         <div className="set-todays-exercises">
           {addExercise ? (

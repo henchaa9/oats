@@ -331,15 +331,17 @@ body {
 
 .calendar-div {
   padding: 3vh 0 0 1.5rem;
+  width: 35%;
 }
 
 .day-div {
   overflow-y: scroll;
   height: calc(100vh - 8rem);
+  width: 65%;
 }
 
 .today-date {
-  padding: 1rem 2rem 0.5rem 2rem;
+  padding: 1rem 2rem 0.5rem 1rem;
   font-size: 2.6rem;
   font-weight: 600;
   text-decoration: underline;
@@ -347,7 +349,7 @@ body {
 }
 
 .set-todays-exercises {
-  margin: 0.5rem 1rem 2rem 1.2rem;
+  margin: 0.2rem 1rem 2rem 0rem;
 }
 
 .todays-exercises-container {
@@ -378,14 +380,12 @@ body {
   white-space: nowrap;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding: 0 1rem;
-  border-radius: 15px;
-  width: 92%;
+  width: 100%;
 }
 
 .smallList li {
   font-size: 1.2rem;
-  padding: 0.5rem 0 0.5rem 0.6rem;
+  padding: 0.5rem 0.5rem;
   letter-spacing: 1px;
   text-align: center;
   border-bottom: 1px solid var(--shadow-gray);
@@ -393,5 +393,35 @@ body {
 }
 
 .smallList li:hover {
+  background-color: var(--hover-gray);
+}
+
+.add-div {
+  display: flex;
+}
+
+.add-right {
+  margin-left: 1rem;
+}
+
+.exercise-name {
+  font-size: 2.3rem;
+  padding: 0.5rem 0 1rem 0;
+}
+
+.type-btn {
+  font-size: 1.1rem;
+  margin: 0 0 0 0.6rem;
+  padding: 0.3rem 0.5rem;
+  background-color: var(--bg-gray);
+  font-weight: 500;
+  border: 2px solid black;
+  box-shadow: 3px 3px 1px 1px var(--shadow-gray);
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+
+.type-btn:hover {
+  cursor: pointer;
   background-color: var(--hover-gray);
 }
