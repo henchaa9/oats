@@ -42,12 +42,13 @@ const AddExercises = () => {
         </div>
         <div className="add-right">
           <p className="exercise-name">{currentExercise}</p>
-
           {addMode && (
             <>
-              <button className="type-btn">Reps</button>
-              <button className="type-btn">Time</button>
-              <button className="type-btn">Distance</button>
+              <p className="amount">Enter amount</p>
+              <input type="text" className="amount-input" />
+              <br />
+              <button className="amount-cancel">Cancel</button>
+              <button className="amount-add">Add</button>
             </>
           )}
         </div>

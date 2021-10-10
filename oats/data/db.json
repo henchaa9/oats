@@ -2,7 +2,7 @@
   "exercises": [
     {
       "name": "squats",
-      "description": "",
+      "description": "le good ol squats well if the descripiton was longer, it would make sense. at least i thought it would. what even is this crap app??",
       "id": 1
     },
     {
@@ -21,9 +21,14 @@
       "id": 4
     },
     {
-      "name": "incline bench",
+      "name": "incline bench and what if this name was reaally longgg",
       "description": "mamma mia O-O",
       "id": 5
+    },
+    {
+      "name": "Bicep curls",
+      "description": "",
+      "id": 6
     }
   ]
 }
