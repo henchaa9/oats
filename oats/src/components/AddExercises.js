@@ -3,6 +3,7 @@ import { React, useState, useEffect } from "react";
 const AddExercises = () => {
   const [exercises, setExercises] = useState(null);
   const [addMode, setAddMode] = useState(false);
+  const [amount, setAmount] = useState("-");
   const [currentExercise, setCurrentExercise] = useState(
     "Click on an exercise"
   );
@@ -19,6 +20,30 @@ const AddExercises = () => {
   useEffect(() => {
     fetchAndSet();
   }, []);
+
+  const add = async (e) => {
+    e.preventDefault();
+
+    const exercise = {
+      name: currentExercise,
+      amount,
+    };
+
+    const res = await fetch("http://localhost:8000/cards", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(exercise),
+    });
+
+    const data = await res.json(); //shis iznak ara
+  };
+
+  const cancel = (e) => {
+    console.log("cancelled");
+    e.preventDefault();
+  };
 
   if (exercises) {
     return (
@@ -43,13 +68,28 @@ const AddExercises = () => {
         <div className="add-right">
           <p className="exercise-name">{currentExercise}</p>
           {addMode && (
-            <>
-              <p className="amount">Enter amount</p>
-              <input type="text" className="amount-input" />
+            <form onSubmit={add}>
+              <p className="amount" htmlFor="amount">
+                Amount
+              </p>
+              <input
+                type="text"
+                className="amount-input"
+                name="amount"
+                id="amount"
+                value={amount}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                }}
+              />
               <br />
-              <button className="amount-cancel">Cancel</button>
-              <button className="amount-add">Add</button>
-            </>
+              <button className="amount-cancel" onClick={cancel}>
+                Cancel
+              </button>
+              <button className="amount-add" type="submit">
+                Add
+              </button>
+            </form>
           )}
         </div>
       </div>

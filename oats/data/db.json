@@ -21,14 +21,21 @@
       "id": 4
     },
     {
-      "name": "incline bench and what if this name was reaally longgg",
-      "description": "mamma mia O-O",
-      "id": 5
-    },
-    {
       "name": "Bicep curls",
       "description": "",
       "id": 6
+    }
+  ],
+  "cards": [
+    {
+      "name": "squats",
+      "amount": "-",
+      "id": 1
+    },
+    {
+      "name": "Bench press",
+      "amount": "12x21",
+      "id": 2
     }
   ]
 }
