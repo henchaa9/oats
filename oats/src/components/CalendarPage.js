@@ -36,7 +36,7 @@ const CalendarPage = () => {
         </div>
         <div className="set-todays-exercises">
           {addExercise ? (
-            <AddExercises />
+            <AddExercises date={date}/>
           ) : (
             <TodaysExercises addFunc={() => setAddExercise(true)} />
           )}

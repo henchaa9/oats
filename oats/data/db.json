@@ -2,7 +2,7 @@
   "exercises": [
     {
       "name": "squats",
-      "description": "le good ol squats well if the descripiton was longer, it would make sense. at least i thought it would. what even is this crap app??",
+      "description": "le good ol squats ",
       "id": 1
     },
     {
@@ -26,16 +26,31 @@
       "id": 6
     }
   ],
-  "cards": [
+  "dates": [
     {
-      "name": "squats",
-      "amount": "-",
-      "id": 1
+      "id": 22102021,
+      "exercises": [
+        {
+          "id": 0,
+          "name": "Squats",
+          "description": ""
+        }
+      ]
     },
     {
-      "name": "Bench press",
-      "amount": "12x21",
-      "id": 2
+      "id": 23102021,
+      "exercises": [
+        {
+          "id": 0,
+          "name": "Bicep curls",
+          "amount": "3x8"
+        }
+      ]
+    },
+    {
+      "name": "deadlifts",
+      "amount": "-",
+      "id": 23102022
     }
   ]
 }
