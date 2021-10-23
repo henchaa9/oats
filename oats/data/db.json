@@ -1,4 +1,16 @@
 {
+  "22102021": [
+    {
+      "id": 0,
+      "name": "Squats",
+      "amount": "3x10"
+    },
+    {
+      "name": "Bench press",
+      "amount": "-",
+      "id": 1
+    }
+  ],
   "exercises": [
     {
       "name": "squats",
@@ -22,35 +34,8 @@
     },
     {
       "name": "Bicep curls",
-      "description": "",
+      "description": "suncis gejs",
       "id": 6
-    }
-  ],
-  "dates": [
-    {
-      "id": 22102021,
-      "exercises": [
-        {
-          "id": 0,
-          "name": "Squats",
-          "description": ""
-        }
-      ]
-    },
-    {
-      "id": 23102021,
-      "exercises": [
-        {
-          "id": 0,
-          "name": "Bicep curls",
-          "amount": "3x8"
-        }
-      ]
-    },
-    {
-      "name": "deadlifts",
-      "amount": "-",
-      "id": 23102022
     }
   ]
 }

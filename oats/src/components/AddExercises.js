@@ -31,17 +31,37 @@ const AddExercises = ({date}) => {
 
     const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
 
-    //const res = 
-    await fetch(`http://localhost:8000/dates?id=${ID}`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(exercise),
-    });
+    if (await fetch(`http://localhost:8000/${ID}`).then(res => res.ok)) {
+      await fetch(`http://localhost:8000/${ID}`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(exercise),
+      });
+    }
+    else {
+      await fetch(`http://localhost:8000/${ID}`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(exercise),
+      });
+    }
 
-    // const data = await res.json(); //shis iznak ara
-  };
+  }
+
+  //   await fetch(`http://localhost:8000/${ID}`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(exercise),
+  //   });
+
+  //   const data = await res.json(); //shis iznak ara
+  // };
 
   const cancel = (e) => {
     console.log("cancelled");
