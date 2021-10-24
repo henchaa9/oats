@@ -1,14 +1,49 @@
 {
-  "22102021": [
+  "dates": [
     {
-      "id": 0,
-      "name": "Squats",
-      "amount": "3x10"
+      "id": 22102021,
+      "exercisess": [
+        {
+          "id": 0,
+          "name": "Squats",
+          "amount": "3x10"
+        },
+        {
+          "name": "Bench press",
+          "amount": "-",
+          "id": 1
+        }
+      ]
     },
     {
-      "name": "Bench press",
-      "amount": "-",
-      "id": 1
+      "id": 23102021,
+      "exercisess": [
+        {
+          "id": 0,
+          "name": "incline bench",
+          "amount": "3x12"
+        },
+        {
+          "name": "deadlift",
+          "amount": "a lot",
+          "id": 1
+        }
+      ]
+    },
+    {
+      "id": 24102021,
+      "exercisess": [
+        {
+          "id": 0,
+          "name": "bulgarian squats",
+          "amount": "3x12"
+        },
+        {
+          "name": "rowing",
+          "amount": "3x10min",
+          "id": 1
+        }
+      ]
     }
   ],
   "exercises": [

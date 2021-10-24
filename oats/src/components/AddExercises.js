@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 
-const AddExercises = ({date}) => {
+const AddExercises = ({ID}) => {
   const [exercises, setExercises] = useState(null);
   const [addMode, setAddMode] = useState(false);
   const [amount, setAmount] = useState("-");
@@ -29,26 +29,14 @@ const AddExercises = ({date}) => {
       amount,
     };
 
-    const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
 
-    if (await fetch(`http://localhost:8000/${ID}`).then(res => res.ok)) {
-      await fetch(`http://localhost:8000/${ID}`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(exercise),
-      });
-    }
-    else {
-      await fetch(`http://localhost:8000/${ID}`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(exercise),
-      });
-    }
+    await fetch(`http://localhost:8000/dates?id=${ID}&_embed=exercisess`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(exercise),
+    });
 
   }
 

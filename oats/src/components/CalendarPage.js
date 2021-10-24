@@ -8,14 +8,40 @@ const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
   const [showDate, setShowDate] = useState("");
   const [addExercise, setAddExercise] = useState(false);
+  const [todaysExercises, setTodaysExercises] = useState([])
 
-  useEffect(() => {
+  const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
+
+  const changeDate = (date) => {
+    const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
+    fetchTodaysExercises(ID)
+  }
+
+  const fetchTodaysExercises = async (ID) => {
+    try {
+      await fetch(`http://localhost:8000/dates?id=${ID}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setTodaysExercises(data[0].exercisess)
+          console.log(todaysExercises);
+        })
+    }
+    catch (TypeError) {
+      console.log("nebus vecit");
+    }
+  }
+
+  useEffect(() => {                 ////jasataisa lai 1mo reizi renderojot ir exercises
+    fetchTodaysExercises(ID);
     formatShowDate(date);
     // eslint-disable-next-line
   }, []);
 
   const clickDate = (date) => {
     setDate(date);
+    changeDate(date)
     formatShowDate(date);
   };
 
@@ -36,7 +62,7 @@ const CalendarPage = () => {
         </div>
         <div className="set-todays-exercises">
           {addExercise ? (
-            <AddExercises date={date}/>
+            <AddExercises date={ID} todaysExercises={todaysExercises}/>
           ) : (
             <TodaysExercises addFunc={() => setAddExercise(true)} />
           )}
