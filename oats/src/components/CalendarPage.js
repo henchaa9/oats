@@ -9,17 +9,19 @@ const CalendarPage = () => {
   const [showDate, setShowDate] = useState("");
   const [addExercise, setAddExercise] = useState(false);
   const [todaysExercises, setTodaysExercises] = useState([])
+  // const [ID, setID] = useState(date)
 
-  const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
+  // var ID = 
 
-  const changeDate = (date) => {
-    const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
-    fetchTodaysExercises(ID)
-  }
+  // const changeDate = (date) => {
+  //   const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
+  //   fetchTodaysExercises(ID)
+  // }
 
-  const fetchTodaysExercises = async (ID) => {
+  const fetchTodaysExercises = async (id) => {
     try {
-      await fetch(`http://localhost:8000/dates?id=${ID}`)
+      console.log(id);
+      await fetch(`http://localhost:8000/dates?id=${id}`)
         .then((res) => {
           return res.json();
         })
@@ -33,16 +35,21 @@ const CalendarPage = () => {
     }
   }
 
-  useEffect(() => {                 ////jasataisa lai 1mo reizi renderojot ir exercises
-    fetchTodaysExercises(ID);
+
+  useEffect(() => {                 
+    // fetchTodaysExercises(ID);
     formatShowDate(date);
     // eslint-disable-next-line
   }, []);
 
+  // const changeDate = (date) => {
+  // }
+
   const clickDate = (date) => {
-    setDate(date);
-    changeDate(date)
     formatShowDate(date);
+    setDate(date);
+    const id = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString() 
+    fetchTodaysExercises(id)
   };
 
   const formatShowDate = (date) => {
@@ -54,7 +61,7 @@ const CalendarPage = () => {
   return (
     <div className="calendar-main">
       <div className="calendar-div">
-        <Calendar value={date} onChange={clickDate} />
+        <Calendar value={date} onClickDay={clickDate} />
       </div>
       <div className="day-div">
         <div className="today-exercises">
@@ -62,7 +69,7 @@ const CalendarPage = () => {
         </div>
         <div className="set-todays-exercises">
           {addExercise ? (
-            <AddExercises date={ID} todaysExercises={todaysExercises}/>
+            <AddExercises  todaysExercises={todaysExercises}/> // id jaieliek pie props
           ) : (
             <TodaysExercises addFunc={() => setAddExercise(true)} />
           )}

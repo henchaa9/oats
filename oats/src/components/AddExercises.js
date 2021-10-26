@@ -1,12 +1,13 @@
 import { React, useState, useEffect } from "react";
 
-const AddExercises = ({ID}) => {
+const AddExercises = ({todaysExercises}) => {        // id vajag vel
   const [exercises, setExercises] = useState(null);
   const [addMode, setAddMode] = useState(false);
   const [amount, setAmount] = useState("-");
   const [currentExercise, setCurrentExercise] = useState(
     "Click on an exercise"
   );
+  const id = 22102021
 
   const fetchAndSet = () =>
     fetch("http://localhost:8000/exercises")
@@ -28,9 +29,9 @@ const AddExercises = ({ID}) => {
       name: currentExercise,
       amount,
     };
+                                //this no good
 
-
-    await fetch(`http://localhost:8000/dates?id=${ID}&_embed=exercisess`, {
+    await fetch(`http://localhost:8000/dates?id=${id}&_embed=exercisess`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
