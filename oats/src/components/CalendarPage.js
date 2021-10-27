@@ -9,9 +9,7 @@ const CalendarPage = () => {
   const [showDate, setShowDate] = useState("");
   const [addExercise, setAddExercise] = useState(false);
   const [todaysExercises, setTodaysExercises] = useState([])
-  // const [ID, setID] = useState(date)
-
-  // var ID = 
+  // const [ID, setID] = useState(null)
 
   // const changeDate = (date) => {
   //   const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
@@ -27,7 +25,6 @@ const CalendarPage = () => {
         })
         .then((data) => {
           setTodaysExercises(data[0].exercisess)
-          console.log(todaysExercises);
         })
     }
     catch (TypeError) {
@@ -37,7 +34,6 @@ const CalendarPage = () => {
 
 
   useEffect(() => {                 
-    // fetchTodaysExercises(ID);
     formatShowDate(date);
     // eslint-disable-next-line
   }, []);
@@ -71,7 +67,7 @@ const CalendarPage = () => {
           {addExercise ? (
             <AddExercises  todaysExercises={todaysExercises}/> // id jaieliek pie props
           ) : (
-            <TodaysExercises addFunc={() => setAddExercise(true)} />
+            <TodaysExercises addFunc={() => setAddExercise(true)} exercises={todaysExercises} />
           )}
         </div>
       </div>

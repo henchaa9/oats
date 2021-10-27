@@ -1,7 +1,7 @@
 import React from "react";
 import ExerciseCard from "./ExerciseCard";
 
-const TodaysExercises = ({ addFunc }) => {
+const TodaysExercises = ({ addFunc, exercises}) => {
   return (
     <div>
       <button onClick={addFunc} className="calendar-add-btn">
@@ -11,6 +11,15 @@ const TodaysExercises = ({ addFunc }) => {
         <ExerciseCard text="hello" amount="3x123" />
         <ExerciseCard text="hello" amount="3x123" />
         <ExerciseCard text="hello" amount="3x123" />
+      </div>
+      <div>
+        <ul>
+          {exercises.map((exercise) => {
+            return (
+              <li>{exercise.name}</li>
+            )
+          })}
+        </ul>
       </div>
     </div>
   );
