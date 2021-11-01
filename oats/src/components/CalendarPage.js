@@ -9,12 +9,6 @@ const CalendarPage = () => {
   const [showDate, setShowDate] = useState("");
   const [addExercise, setAddExercise] = useState(false);
   const [todaysExercises, setTodaysExercises] = useState([])
-  // const [ID, setID] = useState(null)
-
-  // const changeDate = (date) => {
-  //   const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
-  //   fetchTodaysExercises(ID)
-  // }
 
   const fetchTodaysExercises = async (id) => {
     try {
@@ -29,17 +23,27 @@ const CalendarPage = () => {
     }
     catch (TypeError) {
       console.log("nebus vecit");
+      setTodaysExercises([])
+
+      const newdate = {
+        id: parseInt(id),
+        exercises: []
+      }
+
+      await fetch(`http://localhost:8000/dates`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(newdate),
+      });
     }
   }
-
 
   useEffect(() => {                 
     formatShowDate(date);
     // eslint-disable-next-line
   }, []);
-
-  // const changeDate = (date) => {
-  // }
 
   const clickDate = (date) => {
     formatShowDate(date);
@@ -67,7 +71,7 @@ const CalendarPage = () => {
           {addExercise ? (
             <AddExercises  todaysExercises={todaysExercises}/> // id jaieliek pie props
           ) : (
-            <TodaysExercises addFunc={() => setAddExercise(true)} exercises={todaysExercises} />
+            <TodaysExercises addFunc={() => setAddExercise(true)} todaysexercises={todaysExercises} />
           )}
         </div>
       </div>

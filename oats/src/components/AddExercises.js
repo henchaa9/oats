@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 
 const AddExercises = ({todaysExercises}) => {        // id vajag vel
-  const [exercises, setExercises] = useState(null);
+  const [exercises, setExercises] = useState([todaysExercises]);
   const [addMode, setAddMode] = useState(false);
   const [amount, setAmount] = useState("-");
   const [currentExercise, setCurrentExercise] = useState(
@@ -29,28 +29,15 @@ const AddExercises = ({todaysExercises}) => {        // id vajag vel
       name: currentExercise,
       amount,
     };
-                                //this no good
 
-    await fetch(`http://localhost:8000/dates?id=${id}&_embed=exercisess`, {
+    await fetch(`http://localhost:8000/dates?id=${id}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify(exercise),
     });
-
   }
-
-  //   await fetch(`http://localhost:8000/${ID}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(exercise),
-  //   });
-
-  //   const data = await res.json(); //shis iznak ara
-  // };
 
   const cancel = (e) => {
     console.log("cancelled");

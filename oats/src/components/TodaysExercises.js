@@ -1,25 +1,16 @@
 import React from "react";
 import ExerciseCard from "./ExerciseCard";
 
-const TodaysExercises = ({ addFunc, exercises}) => {
+const TodaysExercises = ({ addFunc, todaysexercises}) => {
   return (
     <div>
       <button onClick={addFunc} className="calendar-add-btn">
         Add
       </button>
       <div className="todays-exercises-container">
-        <ExerciseCard text="hello" amount="3x123" />
-        <ExerciseCard text="hello" amount="3x123" />
-        <ExerciseCard text="hello" amount="3x123" />
-      </div>
-      <div>
-        <ul>
-          {exercises.map((exercise) => {
-            return (
-              <li>{exercise.name}</li>
-            )
-          })}
-        </ul>
+        {todaysexercises && todaysexercises.map((exercise) => {
+          return <ExerciseCard key={exercise.id} text={exercise.name} amount={exercise.amount} />
+        })}
       </div>
     </div>
   );
