@@ -64,6 +64,31 @@
     {
       "id": 14102021,
       "exercises": []
+    },
+    {
+      "id": 10112021,
+      "exercises": []
+    },
+    {
+      "id": 7112021,
+      "exercises": []
+    },
+    {
+      "id": 6112021,
+      "exercises": [
+        {
+          "name": "Bicep curls",
+          "amount": "-"
+        },
+        {
+          "name": "Bicep curls",
+          "amount": "-"
+        },
+        {
+          "name": "Bicep curls",
+          "amount": "-"
+        }
+      ]
     }
   ],
   "exercises": [

@@ -1,13 +1,13 @@
 import { React, useState, useEffect } from "react";
 
-const AddExercises = ({todaysExercises}) => {        // id vajag vel
-  const [exercises, setExercises] = useState([todaysExercises]);
+const AddExercises = ({todaysExercises, date}) => {        // id vajag vel
+  const [exercises, setExercises] = useState([]);
   const [addMode, setAddMode] = useState(false);
   const [amount, setAmount] = useState("-");
   const [currentExercise, setCurrentExercise] = useState(
     "Click on an exercise"
   );
-  const id = 22102021
+  const [todaysExerciseArray, setTodaysExerciseArray] = useState([])
 
   const fetchAndSet = () =>
     fetch("http://localhost:8000/exercises")
@@ -27,15 +27,33 @@ const AddExercises = ({todaysExercises}) => {        // id vajag vel
 
     const exercise = {
       name: currentExercise,
-      amount,
+      amount
     };
 
+    setTodaysExerciseArray([...todaysExerciseArray, exercise])
+  }
+
+  const save = async () => {
+    const id = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString() 
+    // console.log(todaysExerciseArray);
+
+    //delete old
     await fetch(`http://localhost:8000/dates?id=${id}`, {
+      method: "DELETE"
+    });
+      
+    const newDate = {
+      id: parseInt(id),
+      exercises: todaysExerciseArray
+    }
+
+    //add new
+    await fetch(`http://localhost:8000/dates`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(exercise),
+      body: JSON.stringify(newDate),
     });
   }
 
@@ -88,6 +106,7 @@ const AddExercises = ({todaysExercises}) => {        // id vajag vel
               <button className="amount-add" type="submit">
                 Add
               </button>
+              <button onClick={save}>Save</button>
             </form>
           )}
         </div>

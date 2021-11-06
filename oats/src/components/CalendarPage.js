@@ -12,7 +12,7 @@ const CalendarPage = () => {
 
   const fetchTodaysExercises = async (id) => {
     try {
-      console.log(id);
+      // console.log(id);
       await fetch(`http://localhost:8000/dates?id=${id}`)
         .then((res) => {
           return res.json();
@@ -41,6 +41,8 @@ const CalendarPage = () => {
   }
 
   useEffect(() => {                 
+    const id = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString() 
+    fetchTodaysExercises(id)
     formatShowDate(date);
     // eslint-disable-next-line
   }, []);
@@ -69,7 +71,7 @@ const CalendarPage = () => {
         </div>
         <div className="set-todays-exercises">
           {addExercise ? (
-            <AddExercises  todaysExercises={todaysExercises}/> // id jaieliek pie props
+            <AddExercises  todaysExercises={todaysExercises} date={date}/> // id jaieliek pie props
           ) : (
             <TodaysExercises addFunc={() => setAddExercise(true)} todaysexercises={todaysExercises} />
           )}
