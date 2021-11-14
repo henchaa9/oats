@@ -1,13 +1,16 @@
 import { React, useState, useEffect } from "react";
 
-const AddExercises = ({todaysExercises, date}) => {        // id vajag vel
+const AddExercises = ({ todaysExercises, date }) => {
+  // id vajag vel
   const [exercises, setExercises] = useState([]);
   const [addMode, setAddMode] = useState(false);
   const [amount, setAmount] = useState("-");
   const [currentExercise, setCurrentExercise] = useState(
     "Click on an exercise"
   );
-  const [todaysExerciseArray, setTodaysExerciseArray] = useState([])
+  const [todaysExerciseArray, setTodaysExerciseArray] = useState(
+    todaysExercises ? todaysExercises : []
+  );
 
   const fetchAndSet = () =>
     fetch("http://localhost:8000/exercises")
@@ -27,25 +30,28 @@ const AddExercises = ({todaysExercises, date}) => {        // id vajag vel
 
     const exercise = {
       name: currentExercise,
-      amount
+      amount,
     };
 
-    setTodaysExerciseArray([...todaysExerciseArray, exercise])
-  }
+    setTodaysExerciseArray([...todaysExerciseArray, exercise]);
+  };
 
   const save = async () => {
-    const id = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString() 
+    const id =
+      date.getDate().toString() +
+      (date.getMonth() + 1).toString() +
+      date.getFullYear().toString();
     // console.log(todaysExerciseArray);
 
     //delete old
-    await fetch(`http://localhost:8000/dates?id=${id}`, {
-      method: "DELETE"
+    await fetch(`http://localhost:8000/dates/${id}`, {
+      method: "DELETE",
     });
-      
+
     const newDate = {
       id: parseInt(id),
-      exercises: todaysExerciseArray
-    }
+      exercises: todaysExerciseArray,
+    };
 
     //add new
     await fetch(`http://localhost:8000/dates`, {
@@ -55,7 +61,7 @@ const AddExercises = ({todaysExercises, date}) => {        // id vajag vel
       },
       body: JSON.stringify(newDate),
     });
-  }
+  };
 
   const cancel = (e) => {
     console.log("cancelled");

@@ -2,7 +2,7 @@
   "dates": [
     {
       "id": 22102021,
-      "exercisess": [
+      "exercises": [
         {
           "id": 0,
           "name": "Squats",
@@ -17,7 +17,7 @@
     },
     {
       "id": 23102021,
-      "exercisess": [
+      "exercises": [
         {
           "id": 0,
           "name": "incline bench",
@@ -32,7 +32,7 @@
     },
     {
       "id": 24102021,
-      "exercisess": [
+      "exercises": [
         {
           "id": 0,
           "name": "bulgarian squats",
@@ -44,10 +44,6 @@
           "id": 1
         }
       ]
-    },
-    {
-      "id": 14112021,
-      "exercises": []
     },
     {
       "id": 4112021,
@@ -87,6 +83,68 @@
         {
           "name": "Bicep curls",
           "amount": "-"
+        }
+      ]
+    },
+    {
+      "id": 3122021,
+      "exercises": []
+    },
+    {
+      "id": 20112021,
+      "exercises": []
+    },
+    {
+      "id": 13112021,
+      "exercises": []
+    },
+    {
+      "id": 21112021,
+      "exercises": []
+    },
+    {
+      "id": 27112021,
+      "exercises": []
+    },
+    {
+      "id": 12112021,
+      "exercises": []
+    },
+    {
+      "id": 25112021,
+      "exercises": [
+        {
+          "name": "Bench press",
+          "amount": "testing"
+        },
+        {
+          "name": "squats",
+          "amount": "adding"
+        }
+      ]
+    },
+    {
+      "id": 14112021,
+      "exercises": [
+        {
+          "name": "Bench press",
+          "amount": "-"
+        },
+        {
+          "name": "Bench press",
+          "amount": "-"
+        },
+        {
+          "name": "Bench press",
+          "amount": "-sdf"
+        },
+        {
+          "name": "Bench press",
+          "amount": "-sdf"
+        },
+        {
+          "name": "150m",
+          "amount": "not bench press"
         }
       ]
     }

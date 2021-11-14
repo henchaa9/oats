@@ -8,7 +8,7 @@ const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
   const [showDate, setShowDate] = useState("");
   const [addExercise, setAddExercise] = useState(false);
-  const [todaysExercises, setTodaysExercises] = useState([])
+  const [todaysExercises, setTodaysExercises] = useState([]);
 
   const fetchTodaysExercises = async (id) => {
     try {
@@ -18,17 +18,21 @@ const CalendarPage = () => {
           return res.json();
         })
         .then((data) => {
-          setTodaysExercises(data[0].exercisess)
-        })
-    }
-    catch (TypeError) {
-      console.log("nebus vecit");
-      setTodaysExercises([])
+          if (data[0].exercises.length > 0) {
+            setTodaysExercises(data[0].exercises);
+          } else {
+            setTodaysExercises([]);
+            console.log("baigi iss");
+          }
+        });
+    } catch (TypeError) {
+      console.log("making new date");
+      setTodaysExercises([]);
 
       const newdate = {
         id: parseInt(id),
-        exercises: []
-      }
+        exercises: [],
+      };
 
       await fetch(`http://localhost:8000/dates`, {
         method: "POST",
@@ -38,11 +42,14 @@ const CalendarPage = () => {
         body: JSON.stringify(newdate),
       });
     }
-  }
+  };
 
-  useEffect(() => {                 
-    const id = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString() 
-    fetchTodaysExercises(id)
+  useEffect(() => {
+    const id =
+      date.getDate().toString() +
+      (date.getMonth() + 1).toString() +
+      date.getFullYear().toString();
+    fetchTodaysExercises(id);
     formatShowDate(date);
     // eslint-disable-next-line
   }, []);
@@ -50,8 +57,11 @@ const CalendarPage = () => {
   const clickDate = (date) => {
     formatShowDate(date);
     setDate(date);
-    const id = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString() 
-    fetchTodaysExercises(id)
+    const id =
+      date.getDate().toString() +
+      (date.getMonth() + 1).toString() +
+      date.getFullYear().toString();
+    fetchTodaysExercises(id);
   };
 
   const formatShowDate = (date) => {
@@ -71,9 +81,12 @@ const CalendarPage = () => {
         </div>
         <div className="set-todays-exercises">
           {addExercise ? (
-            <AddExercises  todaysExercises={todaysExercises} date={date}/> // id jaieliek pie props
+            <AddExercises todaysExercises={todaysExercises} date={date} /> // id jaieliek pie props
           ) : (
-            <TodaysExercises addFunc={() => setAddExercise(true)} todaysexercises={todaysExercises} />
+            <TodaysExercises
+              addFunc={() => setAddExercise(true)}
+              todaysexercises={todaysExercises}
+            />
           )}
         </div>
       </div>
