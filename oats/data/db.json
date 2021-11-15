@@ -1,14 +1,197 @@
 {
-  "22102021": [
+  "dates": [
     {
-      "id": 0,
-      "name": "Squats",
-      "amount": "3x10"
+      "id": 22102021,
+      "exercises": [
+        {
+          "id": 0,
+          "name": "Squats",
+          "amount": "3x10"
+        },
+        {
+          "name": "Bench press",
+          "amount": "-",
+          "id": 1
+        }
+      ]
     },
     {
-      "name": "Bench press",
-      "amount": "-",
-      "id": 1
+      "id": 23102021,
+      "exercises": [
+        {
+          "id": 0,
+          "name": "incline bench",
+          "amount": "3x12"
+        },
+        {
+          "name": "deadlift",
+          "amount": "a lot",
+          "id": 1
+        }
+      ]
+    },
+    {
+      "id": 24102021,
+      "exercises": [
+        {
+          "id": 0,
+          "name": "bulgarian squats",
+          "amount": "3x12"
+        },
+        {
+          "name": "rowing",
+          "amount": "3x10min",
+          "id": 1
+        }
+      ]
+    },
+    {
+      "id": 4112021,
+      "exercises": []
+    },
+    {
+      "id": 23112021,
+      "exercises": []
+    },
+    {
+      "id": 5112021,
+      "exercises": []
+    },
+    {
+      "id": 14102021,
+      "exercises": []
+    },
+    {
+      "id": 10112021,
+      "exercises": []
+    },
+    {
+      "id": 7112021,
+      "exercises": []
+    },
+    {
+      "id": 6112021,
+      "exercises": [
+        {
+          "name": "Bicep curls",
+          "amount": "-"
+        },
+        {
+          "name": "Bicep curls",
+          "amount": "-"
+        },
+        {
+          "name": "Bicep curls",
+          "amount": "-"
+        }
+      ]
+    },
+    {
+      "id": 3122021,
+      "exercises": []
+    },
+    {
+      "id": 20112021,
+      "exercises": []
+    },
+    {
+      "id": 13112021,
+      "exercises": []
+    },
+    {
+      "id": 21112021,
+      "exercises": []
+    },
+    {
+      "id": 27112021,
+      "exercises": []
+    },
+    {
+      "id": 12112021,
+      "exercises": []
+    },
+    {
+      "id": 25112021,
+      "exercises": [
+        {
+          "name": "Bench press",
+          "amount": "testing"
+        },
+        {
+          "name": "squats",
+          "amount": "adding"
+        }
+      ]
+    },
+    {
+      "id": 14112021,
+      "exercises": [
+        {
+          "name": "Bench press",
+          "amount": "-"
+        },
+        {
+          "name": "Bench press",
+          "amount": "-"
+        },
+        {
+          "name": "Bench press",
+          "amount": "-sdf"
+        },
+        {
+          "name": "Bench press",
+          "amount": "-sdf"
+        },
+        {
+          "name": "150m",
+          "amount": "not bench press"
+        }
+      ]
+    },
+    {
+      "id": 16112021,
+      "exercises": []
+    },
+    {
+      "id": 18112021,
+      "exercises": []
+    },
+    {
+      "id": 15112021,
+      "exercises": [
+        {
+          "name": "kimija ",
+          "amount": "3"
+        },
+        {
+          "name": "Bicep curls",
+          "amount": "-"
+        },
+        {
+          "name": "deadlifts",
+          "amount": "a lot"
+        },
+        {
+          "name": "150m",
+          "amount": "-"
+        },
+        {
+          "name": "kimija ",
+          "amount": "-"
+        },
+        {
+          "name": "150m",
+          "amount": "yeet"
+        },
+        {
+          "name": "squats",
+          "amount": "the squats don't stop babyyy"
+        },
+        {
+          "name": "deadlifts",
+          "amount": "yeehaw"
+        }
+      ]
     }
   ],
   "exercises": [
@@ -36,6 +219,11 @@
       "name": "Bicep curls",
       "description": "suncis gejs",
       "id": 6
+    },
+    {
+      "name": "kimija ",
+      "description": "",
+      "id": 7
     }
   ]
 }

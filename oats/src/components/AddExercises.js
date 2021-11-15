@@ -1,11 +1,21 @@
 import { React, useState, useEffect } from "react";
 
-const AddExercises = ({date}) => {
-  const [exercises, setExercises] = useState(null);
+const AddExercises = ({
+  todaysExercises,
+  date,
+  cancelAdding,
+  saveAll,
+  notSaved,
+}) => {
+  // id vajag vel
+  const [exercises, setExercises] = useState([]);
   const [addMode, setAddMode] = useState(false);
   const [amount, setAmount] = useState("-");
   const [currentExercise, setCurrentExercise] = useState(
     "Click on an exercise"
+  );
+  const [todaysExerciseArray, setTodaysExerciseArray] = useState(
+    todaysExercises ? todaysExercises : []
   );
 
   const fetchAndSet = () =>
@@ -23,49 +33,54 @@ const AddExercises = ({date}) => {
 
   const add = async (e) => {
     e.preventDefault();
+    notSaved();
+
+    setAddMode(false);
+    setCurrentExercise("Click on an exercise");
+    setAmount("-");
 
     const exercise = {
       name: currentExercise,
       amount,
     };
 
-    const ID = date.getDate().toString() + (date.getMonth()+1).toString() + date.getFullYear().toString();
+    setTodaysExerciseArray([...todaysExerciseArray, exercise]);
+  };
 
-    if (await fetch(`http://localhost:8000/${ID}`).then(res => res.ok)) {
-      await fetch(`http://localhost:8000/${ID}`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(exercise),
-      });
-    }
-    else {
-      await fetch(`http://localhost:8000/${ID}`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(exercise),
-      });
-    }
+  const save = async () => {
+    const id =
+      date.getDate().toString() +
+      (date.getMonth() + 1).toString() +
+      date.getFullYear().toString();
+    // console.log(todaysExerciseArray);
 
-  }
+    //delete old
+    await fetch(`http://localhost:8000/dates/${id}`, {
+      method: "DELETE",
+    });
 
-  //   await fetch(`http://localhost:8000/${ID}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(exercise),
-  //   });
+    const newDate = {
+      id: parseInt(id),
+      exercises: todaysExerciseArray,
+    };
 
-  //   const data = await res.json(); //shis iznak ara
-  // };
+    //add new
+    await fetch(`http://localhost:8000/dates`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(newDate),
+    });
+
+    saveAll();
+  };
 
   const cancel = (e) => {
-    console.log("cancelled");
     e.preventDefault();
+    setAddMode(false);
+    setCurrentExercise("Click on an exercise");
+    setAmount("-");
   };
 
   if (exercises) {
@@ -88,32 +103,40 @@ const AddExercises = ({date}) => {
             })}
           </ul>
         </div>
-        <div className="add-right">
-          <p className="exercise-name">{currentExercise}</p>
-          {addMode && (
-            <form onSubmit={add}>
-              <p className="amount" htmlFor="amount">
-                Amount
-              </p>
-              <input
-                type="text"
-                className="amount-input"
-                name="amount"
-                id="amount"
-                value={amount}
-                onChange={(e) => {
-                  setAmount(e.target.value);
-                }}
-              />
-              <br />
-              <button className="amount-cancel" onClick={cancel}>
-                Cancel
-              </button>
-              <button className="amount-add" type="submit">
-                Add
-              </button>
-            </form>
-          )}
+        <div className="parent">
+          <div className="add-right">
+            <p className="exercise-name">{currentExercise}</p>
+            {addMode && (
+              <form onSubmit={add}>
+                <p className="amount" htmlFor="amount">
+                  Amount
+                </p>
+                <input
+                  type="text"
+                  className="amount-input"
+                  name="amount"
+                  id="amount"
+                  value={amount}
+                  onChange={(e) => {
+                    setAmount(e.target.value);
+                  }}
+                />
+                <br />
+                <button className="amount-cancel" onClick={cancel}>
+                  Cancel
+                </button>
+                <button className="amount-add" type="submit">
+                  Add
+                </button>
+              </form>
+            )}
+          </div>
+          <button className="cancel-all" onClick={cancelAdding}>
+            Cancel All
+          </button>
+          <button className="save-all" onClick={save}>
+            Save All
+          </button>
         </div>
       </div>
     );
