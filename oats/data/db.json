@@ -147,6 +147,51 @@
           "amount": "not bench press"
         }
       ]
+    },
+    {
+      "id": 16112021,
+      "exercises": []
+    },
+    {
+      "id": 18112021,
+      "exercises": []
+    },
+    {
+      "id": 15112021,
+      "exercises": [
+        {
+          "name": "kimija ",
+          "amount": "3"
+        },
+        {
+          "name": "Bicep curls",
+          "amount": "-"
+        },
+        {
+          "name": "deadlifts",
+          "amount": "a lot"
+        },
+        {
+          "name": "150m",
+          "amount": "-"
+        },
+        {
+          "name": "kimija ",
+          "amount": "-"
+        },
+        {
+          "name": "150m",
+          "amount": "yeet"
+        },
+        {
+          "name": "squats",
+          "amount": "the squats don't stop babyyy"
+        },
+        {
+          "name": "deadlifts",
+          "amount": "yeehaw"
+        }
+      ]
     }
   ],
   "exercises": [
@@ -174,6 +219,11 @@
       "name": "Bicep curls",
       "description": "suncis gejs",
       "id": 6
+    },
+    {
+      "name": "kimija ",
+      "description": "",
+      "id": 7
     }
   ]
 }

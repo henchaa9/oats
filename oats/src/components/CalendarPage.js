@@ -9,6 +9,7 @@ const CalendarPage = () => {
   const [showDate, setShowDate] = useState("");
   const [addExercise, setAddExercise] = useState(false);
   const [todaysExercises, setTodaysExercises] = useState([]);
+  const [saved, setSaved] = useState(true);
 
   const fetchTodaysExercises = async (id) => {
     try {
@@ -74,6 +75,11 @@ const CalendarPage = () => {
     <div className="calendar-main">
       <div className="calendar-div">
         <Calendar value={date} onClickDay={clickDate} />
+        {addExercise && (
+          <p className="todays-added-exercises">
+            Added now {!saved && <span className="saved-span">(UNSAVED)</span>}
+          </p>
+        )}
       </div>
       <div className="day-div">
         <div className="today-exercises">
@@ -81,7 +87,22 @@ const CalendarPage = () => {
         </div>
         <div className="set-todays-exercises">
           {addExercise ? (
-            <AddExercises todaysExercises={todaysExercises} date={date} /> // id jaieliek pie props
+            <AddExercises
+              todaysExercises={todaysExercises}
+              date={date}
+              cancelAdding={() => {
+                setAddExercise(false);
+                window.location.reload(false);
+              }}
+              saveAll={() => {
+                setAddExercise(false);
+                window.location.reload(false);
+                setSaved(true);
+              }}
+              notSaved={() => {
+                setSaved(false);
+              }}
+            /> // id jaieliek pie props
           ) : (
             <TodaysExercises
               addFunc={() => setAddExercise(true)}

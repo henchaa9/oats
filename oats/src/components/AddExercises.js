@@ -1,6 +1,12 @@
 import { React, useState, useEffect } from "react";
 
-const AddExercises = ({ todaysExercises, date }) => {
+const AddExercises = ({
+  todaysExercises,
+  date,
+  cancelAdding,
+  saveAll,
+  notSaved,
+}) => {
   // id vajag vel
   const [exercises, setExercises] = useState([]);
   const [addMode, setAddMode] = useState(false);
@@ -27,6 +33,11 @@ const AddExercises = ({ todaysExercises, date }) => {
 
   const add = async (e) => {
     e.preventDefault();
+    notSaved();
+
+    setAddMode(false);
+    setCurrentExercise("Click on an exercise");
+    setAmount("-");
 
     const exercise = {
       name: currentExercise,
@@ -61,11 +72,15 @@ const AddExercises = ({ todaysExercises, date }) => {
       },
       body: JSON.stringify(newDate),
     });
+
+    saveAll();
   };
 
   const cancel = (e) => {
-    console.log("cancelled");
     e.preventDefault();
+    setAddMode(false);
+    setCurrentExercise("Click on an exercise");
+    setAmount("-");
   };
 
   if (exercises) {
@@ -88,33 +103,40 @@ const AddExercises = ({ todaysExercises, date }) => {
             })}
           </ul>
         </div>
-        <div className="add-right">
-          <p className="exercise-name">{currentExercise}</p>
-          {addMode && (
-            <form onSubmit={add}>
-              <p className="amount" htmlFor="amount">
-                Amount
-              </p>
-              <input
-                type="text"
-                className="amount-input"
-                name="amount"
-                id="amount"
-                value={amount}
-                onChange={(e) => {
-                  setAmount(e.target.value);
-                }}
-              />
-              <br />
-              <button className="amount-cancel" onClick={cancel}>
-                Cancel
-              </button>
-              <button className="amount-add" type="submit">
-                Add
-              </button>
-              <button onClick={save}>Save</button>
-            </form>
-          )}
+        <div className="parent">
+          <div className="add-right">
+            <p className="exercise-name">{currentExercise}</p>
+            {addMode && (
+              <form onSubmit={add}>
+                <p className="amount" htmlFor="amount">
+                  Amount
+                </p>
+                <input
+                  type="text"
+                  className="amount-input"
+                  name="amount"
+                  id="amount"
+                  value={amount}
+                  onChange={(e) => {
+                    setAmount(e.target.value);
+                  }}
+                />
+                <br />
+                <button className="amount-cancel" onClick={cancel}>
+                  Cancel
+                </button>
+                <button className="amount-add" type="submit">
+                  Add
+                </button>
+              </form>
+            )}
+          </div>
+          <button className="cancel-all" onClick={cancelAdding}>
+            Cancel All
+          </button>
+          <button className="save-all" onClick={save}>
+            Save All
+          </button>
         </div>
       </div>
     );
