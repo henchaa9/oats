@@ -6,8 +6,8 @@ const AddExercises = ({
   cancelAdding,
   saveAll,
   notSaved,
+  addedToday,
 }) => {
-  // id vajag vel
   const [exercises, setExercises] = useState([]);
   const [addMode, setAddMode] = useState(false);
   const [amount, setAmount] = useState("-");
@@ -31,8 +31,7 @@ const AddExercises = ({
     fetchAndSet();
   }, []);
 
-  const add = async (e) => {
-    e.preventDefault();
+  const add = async () => {
     notSaved();
 
     setAddMode(false);
@@ -45,6 +44,7 @@ const AddExercises = ({
     };
 
     setTodaysExerciseArray([...todaysExerciseArray, exercise]);
+    addedToday(exercise);
   };
 
   const save = async () => {
@@ -87,6 +87,12 @@ const AddExercises = ({
     return (
       <div className="add-div">
         <div className="available-exercises">
+          <button className="cancel-all" onClick={cancelAdding}>
+            Cancel All
+          </button>
+          <button className="save-all" onClick={save}>
+            Save All
+          </button>
           <ul className="smallList">
             {exercises.map((exercise) => {
               return (
@@ -131,12 +137,6 @@ const AddExercises = ({
               </form>
             )}
           </div>
-          <button className="cancel-all" onClick={cancelAdding}>
-            Cancel All
-          </button>
-          <button className="save-all" onClick={save}>
-            Save All
-          </button>
         </div>
       </div>
     );

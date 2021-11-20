@@ -91,10 +91,6 @@
       "exercises": []
     },
     {
-      "id": 20112021,
-      "exercises": []
-    },
-    {
       "id": 13112021,
       "exercises": []
     },
@@ -190,6 +186,15 @@
         {
           "name": "deadlifts",
           "amount": "yeehaw"
+        }
+      ]
+    },
+    {
+      "id": 20112021,
+      "exercises": [
+        {
+          "name": "150m",
+          "amount": "6"
         }
       ]
     }

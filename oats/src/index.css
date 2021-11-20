@@ -507,7 +507,6 @@ body {
 }
 
 .cancel-all {
-  margin-left: 9.5rem;
   margin-right: 0.5rem;
   padding-right: 1rem;
   background-color: var(--bg-gray);

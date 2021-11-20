@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import TodaysExercises from "./TodaysExercises";
 import AddExercises from "./AddExercises";
+import ExerciseCard from "./ExerciseCard";
 
 const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
@@ -10,6 +11,7 @@ const CalendarPage = () => {
   const [addExercise, setAddExercise] = useState(false);
   const [todaysExercises, setTodaysExercises] = useState([]);
   const [saved, setSaved] = useState(true);
+  const [addedNow, setAddedNow] = useState([]);
 
   const fetchTodaysExercises = async (id) => {
     try {
@@ -23,7 +25,6 @@ const CalendarPage = () => {
             setTodaysExercises(data[0].exercises);
           } else {
             setTodaysExercises([]);
-            console.log("baigi iss");
           }
         });
     } catch (TypeError) {
@@ -76,9 +77,23 @@ const CalendarPage = () => {
       <div className="calendar-div">
         <Calendar value={date} onClickDay={clickDate} />
         {addExercise && (
-          <p className="todays-added-exercises">
-            Added now {!saved && <span className="saved-span">(UNSAVED)</span>}
-          </p>
+          <div>
+            <p className="todays-added-exercises">
+              Added now{" "}
+              {!saved && <span className="saved-span">(UNSAVED)</span>}
+            </p>
+            <div className="added-now-conainer">
+              {addedNow &&
+                addedNow.map((exercise) => {
+                  return (
+                    <ExerciseCard
+                      name={exercise.name}
+                      amount={exercise.amount}
+                    />
+                  );
+                })}
+            </div>
+          </div>
         )}
       </div>
       <div className="day-div">
@@ -101,6 +116,9 @@ const CalendarPage = () => {
               }}
               notSaved={() => {
                 setSaved(false);
+              }}
+              addedToday={(newExercise) => {
+                setAddedNow(...addedNow, newExercise);
               }}
             /> // id jaieliek pie props
           ) : (
